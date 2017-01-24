@@ -1,7 +1,8 @@
 class TweetsController < ApplicationController
   def index
     @input_tweet = params[:id]? Tweet.find(params[:id]) : Tweet.new
-    @tweet = Tweet.includes(:user).order('updated_at DESC')
+    @tweet = Tweet.includes(:user).order('updated_at DESC').page(params[:page])
+   
   end
   def show
     @tweet = Tweet.find(params[:id])

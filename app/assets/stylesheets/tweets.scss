@@ -1,3 +1,50 @@
 .logout_wrapper{
     text_align: right;
 }
+.tweet_wrapper {
+  &.wrapper {
+    width: 700px;
+  }
+  .actions {
+    div {
+        &.alert {
+        float: left;
+      }
+      &.post {
+        float: right;
+      }
+    }
+  }
+  .tweet {
+    .per {
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 20px;
+
+      border: 1px #000000 solid;
+      &.mine {
+        background-color: #00CC00;
+      }
+
+      p {
+        margin: 0;
+      }
+      .icon {
+        display: inline-block;
+        width: 70px;
+        vertical-align: top;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+      .tweetcontent {
+        display: inline-block;
+        margin-left: 10px;
+        width: 500px;
+        vertical-align: top;
+        word-wrap: break-word;
+      }
+    }
+  }
+}

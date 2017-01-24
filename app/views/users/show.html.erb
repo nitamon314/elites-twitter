@@ -1,0 +1,45 @@
+<div class="user">
+        <div class="userprofile">    
+            <% if @user.image? %>
+                <%= image_tag @user.image.url %>
+            <% else %>
+                NO IMAGE
+            <% end %>
+            </p>
+            <p class="username">
+                <%= @user.name %>
+            </p>
+            <p class="lastlogindate">
+                <%= @user.last_sign_in_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            </p>
+            <p class="userprofile">
+                <%= @user.profile %>
+            </p>
+        </div>
+    <div class="tweet">
+          <% @tweets.each do |t| %>
+        <div class="per <%= 'mine' if t.user.id == current_user.id %>">
+            <p class="icon">
+            <% if t.user.image? %>
+                <%= image_tag t.user.image.url %>
+            <% else %>
+                NO IMAGE
+            <% end %>
+            </p>
+            <p class="tweetname">
+                <%= link_to t.user.name, user_path(t.user.id) %>
+            </p>
+            <p class="tweetdate">
+                <% if mytweet?(t) %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"),[:edit, t] %>
+                <% else %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet %>
+                <% end %>
+            </p>
+            <p class="tweetcontent">
+                <%= t.content %>
+            </p>
+        </div>
+                <% end %>
+    </div>
+</div>   

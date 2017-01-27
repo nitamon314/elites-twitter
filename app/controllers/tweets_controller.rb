@@ -1,7 +1,9 @@
 class TweetsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @input_tweet = params[:id]? Tweet.find(params[:id]) : Tweet.new
-    @tweet = Tweet.includes(:user).order('updated_at DESC').page(params[:page])
+    # @q = Tweet.search(params[:q])@q.result(distinct: true)
+    @tweets = Tweet.includes(:user).order('updated_at DESC').page(params[:page])
    
   end
   def show

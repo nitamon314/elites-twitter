@@ -3,7 +3,7 @@
 }
 .tweet_wrapper {
   &.wrapper {
-    width: 700px;
+    // width: 700px;
   }
   .actions {
     div {
@@ -21,7 +21,7 @@
       padding: 10px;
       margin-top: 20px;
 
-      border: 1px #000000 solid;
+      border: 1px #008000 solid;
       &.mine {
         background-color: #00CC00;
       }
@@ -41,7 +41,7 @@
       .tweetcontent {
         display: inline-block;
         margin-left: 10px;
-        width: 500px;
+        // width: 500px;
         vertical-align: top;
         word-wrap: break-word;
       }

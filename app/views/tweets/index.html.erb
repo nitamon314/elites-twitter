@@ -21,7 +21,8 @@
     <% end %>
   </div>
   <div class="tweet">
-      <% @tweet.each do |t| %>
+      <% if @search.present? %>
+      <% @search_tweets.each do |t| %>
       <div class="per <%= 'mine' if t.user.id == current_user.id %>">
           <p class="icon">
             <% if t.user.image? %>
@@ -45,6 +46,33 @@
             </p>
       </div>
       <% end %>
-      <%= paginate @tweet %>
+      <%= paginate @search_tweets %>
+      <% else %>
+      <% @tweets.each do |t| %>
+      <div class="per <%= 'mine' if t.user.id == current_user.id %>">
+          <p class="icon">
+            <% if t.user.image? %>
+                <%= image_tag t.user.image.url %>
+            <% else %>
+                NO IMAGE
+            <% end %>
+            </p>
+            <p class="tweetname">
+                <%= link_to t.user.name, user_path(t.user.id) %>
+            </p>
+            <p class="tweetdate">
+                <% if mytweet?(t) %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"),[:edit, t] %>
+                <% else %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet %>
+                <% end %>
+            </p>
+            <p class="tweetcontent">
+                <%= t.content %>
+            </p>
+      </div>
+      <% end %>
+      <%= paginate @tweets %>
+      <% end %>
   </div>
 </div>

@@ -1,7 +1,32 @@
-
-
 <% if user_signed_in? %>
+<div class='headerwrapper'>
+<%= link_to 'Twitter', root_path, class: 'logo' %>
+<div class="aftertwitterlogo">
+<%= search_form_for @search do |f| %>
+  <!--<%= f.label :content_cont, '検索するツイート', placeholder: '検索するテキストを入力...' %>-->
+  <%= f.text_field :content_cont, class: 'search'%>
+
+    <%= f.submit '検索', class: 'search-btn btn-primary btn-xs' %>
+
+<% end %>      
+<%= link_to current_user.name, user_path(current_user.id), class: 'headerusername' %>
+
+<%= link_to '設定変更', edit_user_password_path, class: 'headeredit' %>
+
+
       <div class="logout_wrapper">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: 'headerlogout' %>
       </div>
-      <% end %>
+</div>      
+</div>
+<% else %>
+<div class="headerwrapdeforelogin">
+<p>Twitter</p>
+<div class="afterlogobeforelogin">
+<%= link_to 'ログイン', new_user_session_path, class: 'headersignin'%>
+<%= link_to '新規登録', new_user_registration_path ,class: 'headersignup' %>
+</div>
+</div>
+<% end %>
+      
+

@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   
-  def set_search
-  @search = Tweet.ransack(params[:q]) 
-  @search_tweets = @search.result.page(params[:page])
-  end
+   def set_search
+   @q = Tweet.search(params[:q]) 
+  # @search_tweets = @search.result.page(params[:page])
+   end
   private
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :image, :profile])

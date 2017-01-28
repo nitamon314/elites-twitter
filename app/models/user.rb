@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :profile, presence: true
   validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
+  validates :image, file_size: {maximum: 500.kilobytes.to_i}
   # validate :check_image
   
   # private

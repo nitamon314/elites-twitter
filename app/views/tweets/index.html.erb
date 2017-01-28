@@ -3,13 +3,12 @@
   <div class="input">
     <%= form_for @input_tweet do |f| %>
       <div class="form-group">
-        <%= f.label :content %><br/>
-        <%= f.text_area :content, class: 'form-control', rows: 3 %>
+        <%= f.text_area :content, class: 'form-control', rows: 3, value: '本文は140文字以内で投稿' %>
       </div>
       <div class="actions clearfix">
           <div class="alert">
               <% if flash[:alert] %>
-                  <% flash[:alert].each_line do |message| %>
+                  <% flash[:alert].each do |message| %>
                   <p class="alert"><%= message %></p>
                   <% end %>
               <% end %>      
@@ -38,7 +37,7 @@
                 <% if mytweet?(t) %>
                 <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"),[:edit, t] %>
                 <% else %>
-                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet_path(t.id) %>
                 <% end %>
             </p>
             <p class="tweetcontent">
@@ -64,7 +63,7 @@
                 <% if mytweet?(t) %>
                 <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"),[:edit, t] %>
                 <% else %>
-                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet_path(t.id) %>
                 <% end %>
             </p>
             <p class="tweetcontent">

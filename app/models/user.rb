@@ -7,6 +7,20 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   mount_uploader :image, UserImageUploader
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :profile, presence: true
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
+  # validate :check_image
+  
+  # private
+  # def check_image
+  #   if @uploaded_image
+  #     if data.size > 500.kilobytes
+  #       errors.add(:uploaded_image, :too_big_image)
+  #     end
+  #     unless IMAGE_TYPES.has_key?(content_type)
+  #       errors.add(:uploaded_image, :invalid_image)
+  #     end
+  #   end
+  # end
 end

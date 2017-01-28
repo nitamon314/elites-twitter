@@ -3,6 +3,6 @@ class Tweet < ActiveRecord::Base
     
     paginates_per 10
     
-    validates :content, presence: true, allow_blank: false
+    validates :content, presence: true, allow_blank: false, length: { maximum: 140 }
     
 end

@@ -33,7 +33,7 @@
                 <% if mytweet?(t) %>
                 <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"),[:edit, t] %>
                 <% else %>
-                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet_path %>
                 <% end %>
             </p>
             <p class="tweetcontent">

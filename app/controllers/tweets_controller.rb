@@ -33,9 +33,12 @@ class TweetsController < ApplicationController
     else
       flash[:alert] = tweet.errors.full_messages
     end
-    redirect_to action: :index
+    redirect_to action: :edit
   end
   def destroy
+    @tweet = Tweet.find(params[:id])
+    @tweet.destroy
+    redirect_to action: :index, notice: "ツイートを削除しました。"
   end
   private
   def input_tweet_param

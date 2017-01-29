@@ -1,0 +1,35 @@
+<% is_reply = false if is_reply.nil? %>
+
+<div class="per <%= 'mine' if t.user.id == current_user.id %> <%= 'reply' if is_reply %>">
+            <p class="icon">
+            <% if t.user.image? %>
+                <%= image_tag t.user.image.url %>
+            <% else %>
+                NO IMAGE
+            <% end %>
+            </p>
+            <p class="tweetname">
+                <%= link_to t.user.name, user_path(t.user.id) %>
+            </p>
+            <p class="tweetdate">
+                <% if mytweet?(t) %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"),[:edit, t] %>
+                <% else %>
+                <%= link_to t.updated_at.strftime("%Y-%m-%d %H:%M:%S"), tweet_path(t.id) %>
+                <% end %>
+            </p>
+            <p class="tweetcontent">
+                <%= t.content %>
+            </p>
+            <% if mytweet?(t) %>
+            <% else %>
+                <%= link_to root_path(reply_tweet_id: t.id) do %>
+                <%= button_tag '返信', class: 'btn btn-info' %>
+                <% end %>
+            <% end %>
+      </div>
+      
+      <% t.replies.each do |r| %>
+          <%= render 'tweets/tweet', t: r, is_reply: true %>
+            
+      <% end %>

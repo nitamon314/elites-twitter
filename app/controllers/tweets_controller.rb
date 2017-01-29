@@ -3,8 +3,11 @@ class TweetsController < ApplicationController
   def index
     @input_tweet = params[:id]? Tweet.find(params[:id]) : Tweet.new
     # @q = Tweet.search(params[:q])
-    @tweets = @q.result(distinct: true).includes(:user).order('updated_at DESC').page(params[:page])
-   
+    @tweets = @q.result(distinct: true).includes(:user).not_reply.order('updated_at DESC').page(params[:page])
+    
+    if params[:reply_tweet_id]
+      @reply_tweet = Tweet.find(params[:reply_tweet_id])
+    end
   end
   def show
     @tweet = Tweet.find(params[:id])
@@ -42,6 +45,6 @@ class TweetsController < ApplicationController
   end
   private
   def input_tweet_param
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, :reply_tweet_id)
   end
 end
